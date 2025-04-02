@@ -1,4 +1,3 @@
-import config from 'eslint-config-standard';
 import { defineConfig } from 'eslint/config';
 
 
