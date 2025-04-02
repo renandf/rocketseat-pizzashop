@@ -1,3 +1,8 @@
 export function SignIn() {
-  return <h1>Sign in</h1>
+  return (
+    <>
+      <title>🍕 Sign in</title>
+      <h1>Sign in</h1>
+    </>
+  )
 }
