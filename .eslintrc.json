@@ -1,0 +1,10 @@
+{
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "no-extra-semi": "error",
+    "semi": ["error", "never"],
+    "indent": ["error", 2],
+    "quotes": ["error", "single"]
+  }
+}
