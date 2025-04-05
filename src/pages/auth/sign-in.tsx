@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@radix-ui/react-label'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router'
 import { toast } from 'sonner'
 import { z } from 'zod'
 
@@ -31,8 +32,14 @@ export function SignIn() {
 
   return (
     <>
-      <title>🍕 Sign in</title>
+      <title>🍕 Log in</title>
       <div className="p-8">
+        <Button variant="link" asChild className="absolute right-8 top-8">
+          <Link to="/sign-up">
+            New account
+          </Link>
+        </Button>
+
         <div className="w-96 flex flex-col justify-center gap-6">
           <div className="flex flex-col gap-2 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">Access dashboard</h1>
