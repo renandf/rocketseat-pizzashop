@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@radix-ui/react-label'
+import { Label } from '@/components/ui/label'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router'
 import { toast } from 'sonner'
@@ -13,7 +13,11 @@ const signInForm = z.object({
 type SignInForm = z.infer<typeof signInForm>
 
 export function SignIn() {
-  const { register, handleSubmit, formState: {isSubmitting} } = useForm<SignInForm>()
+  const {
+    register,
+    handleSubmit,
+    formState: {isSubmitting}
+  } = useForm<SignInForm>()
 
   async function handleSignIn(data: SignInForm) {
     try {
@@ -49,7 +53,7 @@ export function SignIn() {
 
           <form onSubmit={handleSubmit(handleSignIn)} className="space-y-2 flex flex-col gap-2">
             <div>
-              <Label htmlFor="email">Email</Label>
+              <Label className="mb-2" htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"

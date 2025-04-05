@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@radix-ui/react-label'
+import { Label } from '@/components/ui/label'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router'
 import { toast } from 'sonner'
@@ -26,8 +26,6 @@ export function SignUp() {
 
   async function handleSignUp(data: SignUpForm) {
     try {
-      console.log(data)
-
       await new Promise(resolve => setTimeout(resolve, 2000))
 
       toast.success('Shop registered successfully!', {
@@ -60,7 +58,7 @@ export function SignUp() {
 
           <form onSubmit={handleSubmit(handleSignUp)} className="space-y-2 flex flex-col gap-2">
             <div>
-              <Label htmlFor="shopName">Shop name</Label>
+              <Label className="mb-2" htmlFor="shopName">Shop name</Label>
               <Input
                 id="shopName"
                 type="text"
@@ -69,7 +67,7 @@ export function SignUp() {
             </div>
             
             <div>
-              <Label htmlFor="managerName">Your name</Label>
+              <Label className="mb-2" htmlFor="managerName">Your name</Label>
               <Input
                 id="managerName"
                 type="text"
@@ -78,7 +76,7 @@ export function SignUp() {
             </div>
 
             <div>
-              <Label htmlFor="email">Email</Label>
+              <Label className="mb-2" htmlFor="email">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -87,7 +85,7 @@ export function SignUp() {
             </div>
 
             <div>
-              <Label htmlFor="phone">Phone</Label>
+              <Label className="mb-2" htmlFor="phone">Phone</Label>
               <Input
                 id="phone"
                 type="tel"
@@ -98,7 +96,7 @@ export function SignUp() {
             <Button type="submit" disabled={isSubmitting}>Create account</Button>
 
             <p className="px-6 text-center text-sm text-muted-foreground">
-              By creating an account, you are agreeing to our <a href="" className="underline underline-offset-4 text-primary">terms of service</a> and <a href="" className="underline underline-offset-4 text-primary">privacy policy</a>.
+              By creating an account, you are agreeing to our <a href="" className="underline underline-offset-4 text-primary hover:text-purple-600">terms of service</a> and <a href="" className="underline underline-offset-4 text-primary hover:text-purple-600">privacy policy</a>.
             </p>
           </form>
         </div>
