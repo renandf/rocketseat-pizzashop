@@ -23,7 +23,7 @@ export function OrderTableFilters() {
         </SelectContent>
       </Select>
 
-      <Button type="submit" variant="secondary" size="sm" className="hover:text-purple-400">
+      <Button type="submit" variant="secondary" size="sm" className="hover:text-purple-600 dark:hover:text-purple-400">
         <Search />
         Apply filters
       </Button>
