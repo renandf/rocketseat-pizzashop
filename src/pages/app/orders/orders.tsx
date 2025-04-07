@@ -1,7 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { ArrowRight, Search, X } from "lucide-react";
+import { Table, TableBody, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { OrderTableFilters } from './order-table-filters'
+import { OrderTableRow } from './order-table-row'
 
 export function Orders() {
   return (
@@ -12,10 +11,7 @@ export function Orders() {
       </div>
 
       <div className="space-y-2.5">
-        <form action="" className="flex items-center gap-2">
-          <span className="text-sm font-semibold">Filters:</span>
-          <Input placeholder="Client name" className="h-8 w-xs" />
-        </form>
+        <OrderTableFilters />
 
         <div className="border rounded-md">
           <Table>
@@ -35,42 +31,7 @@ export function Orders() {
             <TableBody>
               {Array.from({ length: 10 }).map((_, i) => {
                 return (
-                  <TableRow key={i}>
-                    <TableCell>
-                      <Button variant="outline" size="sm">
-                        <Search className="h-3 w-3" />
-                        <span className="sr-only">Order details</span>
-                      </Button>
-                    </TableCell>
-                    <TableCell className="font-mono text-xs font-medium">
-                      2309fkajf0293
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      15 minutes ago
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center gap-2">
-                        <span className="h-2 w-2 rounded-full bg-slate-400" />
-                        <span className="font-medium text-muted-foreground">Pending</span>
-                      </div>
-                    </TableCell>
-                    <TableCell className="font-medium">
-                      Renan Castro
-                    </TableCell>
-                    <TableCell className="font-medium">$149.00</TableCell>
-                    <TableCell>
-                      <Button variant="outline" size="sm">
-                        <ArrowRight className="h-3 w-3 mr-2" />
-                        Approve
-                      </Button>
-                    </TableCell>
-                    <TableCell>
-                      <Button variant="ghost" size="sm">
-                        <X className="h-3 w-3 mr-2" />
-                        Cancel
-                      </Button>
-                    </TableCell>
-                  </TableRow>
+                  <OrderTableRow key={i} />
                 )
               })}
             </TableBody>
