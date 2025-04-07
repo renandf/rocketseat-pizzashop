@@ -1,17 +1,25 @@
 import { Button } from '@/components/ui/button'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { ArrowRight, Search, X } from 'lucide-react'
+import { OrdersDetails } from './orders-details'
 
-interface OrderTableRowProps {}
+// interface OrderTableRowProps {}
 
-export function OrderTableRow(props: OrderTableRowProps) {
+export function OrderTableRow() {
   return (
     <TableRow>
       <TableCell>
-        <Button variant="outline" size="sm">
-          <Search />
-          <span className="sr-only">Order details</span>
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline" size="sm">
+              <Search />
+              <span className="sr-only">Order details</span>
+            </Button>
+          </DialogTrigger>
+
+          <OrdersDetails />
+        </Dialog>
       </TableCell>
       <TableCell className="font-mono text-xs font-medium">
         2309fkajf0293
