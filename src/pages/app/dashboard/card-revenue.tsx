@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { DollarSign } from 'lucide-react'
 
-export function CardRevenueMonth() {
+export function CardRevenue() {
   return (
     <Card>
       <CardHeader className="flex items-center justify-between">

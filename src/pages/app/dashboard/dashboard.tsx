@@ -1,4 +1,7 @@
-import { CardRevenueMonth } from "./card-revenue-month";
+import { CardOrders } from './card-orders'
+import { CardOrdersCancelled } from './card-orders-cancelled'
+import { CardOrdersDay } from './card-orders-day'
+import { CardRevenue } from './card-revenue'
 
 export function Dashboard() {
   return (
@@ -8,7 +11,10 @@ export function Dashboard() {
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
 
         <div className="grid grid-cols-4 gap-4">
-          <CardRevenueMonth />
+          <CardRevenue />
+          <CardOrders/>
+          <CardOrdersDay />
+          <CardOrdersCancelled />
         </div>
       </div>
     </>
