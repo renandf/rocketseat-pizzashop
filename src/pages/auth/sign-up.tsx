@@ -1,6 +1,8 @@
+import { registerShop } from '@/api/register-shop'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router'
 import { toast } from 'sonner'
@@ -24,14 +26,23 @@ export function SignUp() {
     formState: {isSubmitting}
   } = useForm<SignUpForm>()
 
+  const { mutateAsync: registerShopFn } = useMutation({
+    mutationFn: registerShop,
+  })
+
   async function handleSignUp(data: SignUpForm) {
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      await registerShopFn({
+        restaurantName: data.shopName,
+        managerName: data.managerName,
+        email: data.email,
+        phone: data.phone,
+      })
 
       toast.success('Shop registered successfully!', {
         action: {
           label: 'Login',
-          onClick: () => navigate('/sign-in'),
+          onClick: () => navigate(`/sign-in?email=${data.email}`),
         }
       })
     } catch {
