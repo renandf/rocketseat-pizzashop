@@ -1,20 +1,35 @@
+import { getManagedShop } from '@/api/get-managed-shop'
+import { getProfile } from '@/api/get-profile'
+import { useQuery } from '@tanstack/react-query'
 import { Building, ChevronDown, LogOut } from 'lucide-react'
 import { Button } from './ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu'
 
 export function AccountMenu() {
+  const { data: profile } = useQuery({
+    queryKey: ['profile'],
+    queryFn: getProfile
+  })
+
+  const { data: managedShop } = useQuery({
+    queryKey: ['managed-shop'],
+    queryFn: getManagedShop
+  })
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="flex items-center gap-2 select-none">
-          Pizza shop
+          {managedShop?.name}
           <ChevronDown className="w-4 h-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="flex flex-col">
-          <span>Renan Castro</span>
-          <span className="text-sm font-normal text-muted-foreground">hi@renancastro.com</span>
+          <span>{profile?.name}</span>
+          <span className="text-sm font-normal text-muted-foreground">
+            {profile?.email}
+          </span>
         </DropdownMenuLabel>
 
         <DropdownMenuSeparator />
