@@ -1,0 +1,75 @@
+import { getManagedShop } from '@/api/get-managed-shop'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useQuery } from '@tanstack/react-query'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { Button } from './ui/button'
+import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from './ui/dialog'
+import { Input } from './ui/input'
+import { Label } from './ui/label'
+import { Textarea } from './ui/textarea'
+
+const storeProfileSchema = z.object({
+  name: z.string().min(1),
+  description: z.string()
+})
+
+type StoreProfileSchema = z.infer<typeof storeProfileSchema>
+
+export function StoreProfileDialog() {
+  const { data: managedShop } = useQuery({
+    queryKey: ['managed-shop'],
+    queryFn: getManagedShop
+  })
+
+  const {
+    register,
+    handleSubmit
+  } = useForm<StoreProfileSchema>({
+    resolver: zodResolver(storeProfileSchema),
+    values: {
+      name: managedShop?.name ?? '',
+      description: managedShop?.description ?? '',
+    }
+  })
+
+  return (
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Shop profile</DialogTitle>
+        <DialogDescription>
+          Update your shop details visible to your clients
+        </DialogDescription>
+      </DialogHeader>
+
+      <form>
+        <div className="space-y-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name">Name</Label>
+            <Input
+              className="col-span-3"
+              id="name"
+              {...register('name')}
+            />
+          </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="description">
+              Description
+            </Label>
+            <Textarea
+              className="col-span-3"
+              id="description"
+              {...register('description')}
+            />
+          </div>
+        </div>
+
+        <DialogFooter>
+          <Button type="button" variant="ghost">Cancel</Button>
+          <Button type="submit" variant="success">Save</Button>
+        </DialogFooter>
+      </form>
+    </DialogContent>
+  )
+}
