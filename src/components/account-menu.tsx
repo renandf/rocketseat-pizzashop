@@ -11,12 +11,14 @@ import { Skeleton } from './ui/skeleton'
 export function AccountMenu() {
   const { data: profile, isLoading: isLoadingProfile } = useQuery({
     queryKey: ['profile'],
-    queryFn: getProfile
+    queryFn: getProfile,
+    staleTime: Infinity
   })
 
   const { data: managedShop, isLoading: isLoadingManagedShop } = useQuery({
     queryKey: ['managed-shop'],
-    queryFn: getManagedShop
+    queryFn: getManagedShop,
+    staleTime: Infinity
   })
 
   return (
