@@ -13,7 +13,7 @@ import { Textarea } from './ui/textarea'
 
 const storeProfileSchema = z.object({
   name: z.string().min(1),
-  description: z.string()
+  description: z.string().nullable()
 })
 
 type StoreProfileSchema = z.infer<typeof storeProfileSchema>
@@ -39,17 +39,38 @@ export function StoreProfileDialog() {
     }
   })
 
+  function updateManagedShopCache({
+    name,
+    description
+  }: StoreProfileSchema) {
+    const cached = queryClient.getQueryData<GetManagedShopResponse>(['managed-shop'])
+
+    if (cached) {
+      queryClient.setQueryData<GetManagedShopResponse>(['managed-shop'], {
+        ...cached,
+        name,
+        description,
+      })
+    }
+
+    return { cached }
+  }
+
   const { mutateAsync: updateProfileFn } = useMutation({
     mutationFn: updateProfile,
-    onSuccess(_, { name, description }) {
-      const cached = queryClient.getQueryData<GetManagedShopResponse>(['managed-shop'])
 
-      if (cached) {
-        queryClient.setQueryData<GetManagedShopResponse>(['managed-shop'], {
-          ...cached,
-          name,
-          description,
-        })
+    // onMutate is an 'optimistic update' that will update
+    // the UI before successfull confirmation
+    onMutate({ name, description }) {
+      const { cached } = updateManagedShopCache({ name, description })
+
+      return { previousProfile: cached }
+    },
+
+    // if onMutate fails, revert back to previous value
+    onError(_, __, context) {
+      if (context?.previousProfile) {
+        updateManagedShopCache(context.previousProfile)
       }
     },
   })
